@@ -1,0 +1,14 @@
+C:\Webbserver\CS5\exe4\bin\Debug\net10.0\exe4.exe
+C:\Webbserver\CS5\exe4\bin\Debug\net10.0\exe4.deps.json
+C:\Webbserver\CS5\exe4\bin\Debug\net10.0\exe4.runtimeconfig.json
+C:\Webbserver\CS5\exe4\bin\Debug\net10.0\exe4.dll
+C:\Webbserver\CS5\exe4\bin\Debug\net10.0\exe4.pdb
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\exe4.GeneratedMSBuildEditorConfig.editorconfig
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\exe4.AssemblyInfoInputs.cache
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\exe4.AssemblyInfo.cs
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\exe4.csproj.CoreCompileInputs.cache
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\exe4.dll
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\refint\exe4.dll
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\exe4.pdb
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\exe4.genruntimeconfig.cache
+C:\Webbserver\CS5\exe4\obj\Debug\net10.0\ref\exe4.dll
