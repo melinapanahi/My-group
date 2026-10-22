@@ -1,41 +1,144 @@
-﻿Console.WriteLine("1. Addition \n2. Subtraktion \n3. Multiplikation \n4. Divition \n5. Potens");
+﻿// Lista för att spara beräkningshistorik
+List<string> history = new List<string>();
 
-Console.WriteLine("Välj din beräkningssätt");
-int? val = int.TryParse(Console.ReadLine(), out int val1) ? val1 : null;
+bool running = true;
 
-Console.WriteLine("Ange första talet/ täljare / bas (om du väljer potens)");
-int? ftal = int.TryParse(Console.ReadLine(), out int ftalet)? ftalet : null;
-
-Console.WriteLine("Ange andra talet/ nämnare / potens (om du väljer potens)");
-int? stal = int.TryParse(Console.ReadLine(), out int stalet)? stalet : null;
-
-Calculator numbers = new(){ tal1 = ftalet , tal2 = stalet};
-
-switch (val)
+// Huvudmeny
+while (running)
 {
-    case 1 : Console.WriteLine($"{ftalet} + {stalet} = {numbers.Addition()}");
-    break;
-    case 2 : Console.WriteLine($"{ftalet} - {stalet} = {numbers.Subtraktion()}");
-    break;
-    case 3 : Console.WriteLine($"{ftalet} * {stalet} = {numbers.Multiplikation()}");
-    break;
-    case 4 : Console.WriteLine($"{ftalet} / {stalet} = {numbers.Divition()}");
-    break;
-    case 5 : Console.WriteLine($"{ftalet} ^ {stalet} = {numbers.Potens()}");
-    break;
+    Console.WriteLine("\n========== Miniräknare ==========");
+    Console.WriteLine("1. Addition \n2. Subtraktion \n3. Multiplikation \n4. Divition \n5. Potens \n6. Visa historik \n0. Avsluta");
 
-    default : Console.WriteLine("Fel val");
-    break;
-    
+    int val = ReadInt("\nVälj alternativ: ");
+
+    if (val >= 1 && val <= 5)
+    {
+        Calculate(val, history);
+    }
+    else if (val == 6)
+    {
+        ShowHistory(history);
+    }
+    else if (val == 0)
+    {
+        running = false;
+        Console.WriteLine("Programmet avslutas. Hej då!");
+    }
+    else
+    {
+        Console.WriteLine("Ogiltigt val! Försǒk igen.");
+    }
 }
 
+// Method 1: Kontrollera inmatning
+static int ReadInt(string message)
+{
+    while (true)
+    {
+        Console.Write(message);
+        string? input = Console.ReadLine();
 
+        if (int.TryParse(input, out int number))
+        {
+            return number;
+        }
+        else
+        {
+            Console.WriteLine("Ogiltig inmatning! Ange ett heltal");
+        }
+    }
+}
 
+// Method 2: Utföra beräkning
 
+static void Calculate(int val, List<string> history)
+{
+    int tal1 = ReadInt("\nAnge första talet: ");
+    int tal2 = ReadInt("Ange andra talet: ");
+
+    Calculator number = new Calculator()
+    {
+        tal1 = tal1,
+        tal2 = tal2
+    };
+
+    double result = 0;
+    string operation = "";
+
+    switch (val)
+    {
+        case 1:
+            result = number.Addition();
+            operation = "+";
+            break;
+
+        case 2:
+            result = number.Subtraktion();
+            operation = "-";
+            break;
+
+        case 3:
+            result = number.Multiplikation();
+            operation = "*";
+            break;
+
+        case 4:
+            if (tal2 == 0)
+            {
+                Console.WriteLine("Det går inte att dividera med 0!");
+                return;
+            }
+            else
+            {
+                result = number.Divition();
+                operation = "/";
+            }
+            break;
+        
+        case 5:
+            result = number.Potens();
+            operation = "^";
+            break;
+    }
+
+    if (double.IsInfinity(result) || double.IsNaN(result))
+    {
+        Console.WriteLine("Ogiltigt resultat.");
+    }
+    else
+    {
+        string calculation = $"{tal1} {operation} {tal2} = {result}";
+        Console.WriteLine($"\nResultat: {calculation}");
+
+        // Sparar beräkningen i listan
+        history.Add(calculation);
+    }
+}
+
+// Method 3 : Visa historik
+
+static void ShowHistory(List<string> history)
+{
+    Console.WriteLine("\n---------- HISTORIK ----------");
+
+    if (history.Count == 0)
+    {
+        Console.WriteLine("Ingen historik finns ännu.");
+    }
+    else
+    {
+        foreach (string calculation in history)
+        {
+            Console.WriteLine(calculation);
+        }
+    }
+}
+
+// Klass: Calculator
 class Calculator
 {
-    public int tal1{get;set;}
-    public int tal2 {get;set;}
+    public int tal1 {get; set;}
+    public int tal2 {get; set;}
 
     public double Addition()
     {
@@ -54,12 +157,6 @@ class Calculator
 
     public double Divition()
     {
-        if (tal2 == 0)
-        {
-            Console.WriteLine("Det är inte tillåtet att dividera med 0");
-            return 0;
-        }
-
         return (double)tal1 / tal2;
     }
 
