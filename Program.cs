@@ -96,23 +96,22 @@ static void Calculate(int val, List<string> history)
             break;
         
         case 5:
-            result = number.Potens();
-            operation = "^";
-            break;
+        if (tal1 == 0 && tal2 < 0)
+            {
+                Console.WriteLine("Beräkingen kan inte genomförs");
+                return;
+            } else {
+                result = number.Potens();
+                operation = "^";
+                break;
+            }
     }
 
-    if (double.IsInfinity(result) || double.IsNaN(result))
-    {
-        Console.WriteLine("Ogiltigt resultat.");
-    }
-    else
-    {
-        string calculation = $"{tal1} {operation} {tal2} = {result}";
-        Console.WriteLine($"\nResultat: {calculation}");
+    string calculation = $"{tal1} {operation} {tal2} = {result}";
+    Console.WriteLine($"\nResultat: {calculation}");
 
-        // Sparar beräkningen i listan
-        history.Add(calculation);
-    }
+    // Sparar beräkningen i listan
+    history.Add(calculation);
 }
 
 // Method 3 : Visa historik
